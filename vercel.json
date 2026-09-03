@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/ladingpagemodelo/MODELO/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/ladingpagemodelo/MODELO/$1"
+    }
+  ]
+}
