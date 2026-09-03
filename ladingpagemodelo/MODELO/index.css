@@ -1,0 +1,1107 @@
+﻿body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: rgb(226, 226, 226);
+    margin: 0;
+    padding: 0;
+    display: flex;/* flexbox: layout em linha ou coluna sem float */
+    flex-direction: column;
+ /* empilha filhos na vertical (coluna) */
+    min-height: 100vh;
+ /* 100% da altura da janela do navegador (viewport height) */
+}
+#nav{
+    position: sticky;
+
+    /* mantém a navegação visível enquanto a página rola */
+    top: 0;
+    
+    /* fixa a referência do sticky no topo da janela */
+    z-index: 20;
+    
+    /* garante que a nav fique acima de outros blocos */
+    background-color: rgba(255, 255, 255, 0.432);
+    
+    /* cria um fundo branco semitransparente para dar contraste */
+    backdrop-filter: saturate(180%) blur(20px);
+    
+    /* aplica saturação e desfoque no que estiver atrás da barra */
+    padding: 14px 24px;
+    
+    /* adiciona espaço interno para a nav respirar melhor */
+    margin: 0;
+    
+    /* remove espaço externo para a barra encostar corretamente */
+    border-radius: 0 0 12px 12px;
+    
+    /* arredonda apenas os cantos inferiores da navegação */
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    
+    /* cria uma sombra suave para destacar a nav do conteúdo */
+}
+#nav ul{
+    display: flex;
+    
+    /* ativa flexbox para alinhar os itens da lista */
+    justify-content: center;
+    
+    /* centraliza todos os itens da lista horizontalmente */
+    align-items: center;
+    
+    /* alinha verticalmente os itens no mesmo eixo */
+    flex-wrap: wrap;
+    
+    /* permite quebrar os itens para a linha de baixo no celular */
+    gap: 14px 28px;
+    
+    /* controla o espaçamento entre os links em linha e em quebra */
+    width: 100%;
+    
+    /* faz a lista ocupar toda a largura disponível */
+    margin: 0;
+    
+    /* remove a margem padrão da lista */
+    padding: 0;
+    
+    /* remove o recuo interno padrão do navegador */
+}
+#nav li {
+    list-style-type: none;
+    
+    /* remove o marcador de bolinha dos itens da lista */
+}
+
+#nav li:first-child {
+    margin-right: auto;
+    
+    /* empurra a logo para o canto esquerdo e deixa os links no restante da barra */
+}
+
+#nav a{
+    text-decoration:none;
+    
+    /* remove o sublinhado padrão dos links */
+    color: #1d242d;
+    
+    /* define uma cor escura para melhorar a leitura dos links */
+    font-weight: 600;
+    
+    /* reforça visualmente os links com peso maior */
+    font-size: 0.98rem;
+    
+    /* ajusta o tamanho do texto para ficar equilibrado */
+    padding: 10px 14px;
+    
+    /* cria uma área clicável mais confortável ao redor do texto */
+    border-radius: 999px;
+    
+    /* deixa o fundo do hover em formato de cápsula */
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    
+    /* suaviza as mudanças visuais de hover */
+}
+
+#nav a:hover{
+    background-color: rgba(14, 38, 173, 0.1);
+    
+    /* adiciona um fundo leve ao passar o mouse */
+    color: #0e26ad;
+    
+    /* muda a cor do texto no hover para destacar o link */
+    transform: translateY(-1px);
+    
+    /* sobe levemente o link para dar sensação de interação */
+}
+
+#logo[src=""]{
+    display: none;
+    
+    /* esconde a imagem quando o src da logo estiver vazio */
+}
+
+#nav img{
+    width: 30px;
+    
+    /* define a logo com 100px de largura */
+    height: auto;
+    
+    /* mantém a altura proporcional à largura da imagem */
+    padding: 0;
+    
+    /* remove espaçamento interno da imagem */
+    border-radius: 14px;
+    
+    /* preserva cantos arredondados, se a imagem tiver fundo */
+    background-color: rgba(255, 255, 255, 0);
+    
+    /* mantém o fundo da imagem transparente */
+    object-fit: contain;
+    
+    /* mantém proporção da imagem dentro da caixa sem cortar */
+    display: block;
+    
+    /* evita espaço extra de imagem inline e ajuda no alinhamento */
+}
+
+@media (max-width: 768px) {
+    #nav {
+        padding: 12px 14px;
+        
+        /* reduz o espaçamento interno da barra em telas menores */
+    }
+    
+    #nav ul {
+        gap: 10px 12px;
+        
+        /* diminui a distância entre os itens no celular */
+    }
+
+    #nav a {
+        font-size: 0.92rem;
+        
+        /* reduz um pouco o tamanho do texto em telas menores */
+        padding: 1px 1px;
+        
+        /* reduz a área interna dos links para caber melhor no mobile */
+    }
+}
+#header {
+    flex: 1;
+ /* shorthand flex-grow: ocupa o espaço vertical livre entre header e footer */ 
+}
+#hero {
+    background-image: url('imgs/tons.png');
+    background-color: #000000;
+    color: rgba(255, 255, 255, 0.95);
+    /* rgb + canal alpha (transparência 0–1) */
+    padding: 130px 20px;
+    text-align: center;
+    background-position: center;
+    /* onde a imagem de fundo “ancora” no box */
+    background-size: cover;
+    /* encaixa a imagem cobrindo a área sem distorcer (corta bordas se precisar) */
+    background-repeat: no-repeat;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* alinhamento no eixo principal (vertical aqui) */
+    align-items: center;
+    /* alinhamento no eixo transversal (horizontal aqui) */
+    border-radius: 0 0 10px 10px;
+    /* cantos arredondados só embaixo: top-left top-right bottom-right bottom-left */
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-badge-top {/* controla o espaçamento do btn que fica sozinho no topo */
+    margin-bottom: 28px; 
+    /* separa a cápsula superior do título */
+}
+
+#hero h1 {/* organiza a leitura do título principal no hero */
+    margin: 0 0 18px; 
+    /* remove margem de cima e cria espaço abaixo do título */
+}
+
+#hero p { /* ajusta o subtítulo logo abaixo do título principal */
+    margin: 0 0 30px; 
+    /* cria respiro entre o texto e a fileira de btn inferiores */
+}
+
+.hero-badges {/* organiza os btn em linha dentro do hero */
+    display: flex; 
+    /* coloca todos os btn lado a lado */
+    flex-direction: row; 
+    /* força a direção horizontal */
+    flex-wrap: wrap; 
+    /* permite quebrar linha se faltar espaço */
+    justify-content: center; 
+    /* centraliza o grupo de btn */
+    align-items: center; 
+    /* alinha os btn no mesmo eixo vertical */
+    gap: 12px; 
+    /* cria espaço entre um btn e outro */
+    margin-bottom: 28px; 
+    /* separa o grupo do botão de WhatsApp */
+}
+
+.btn { /* transforma cada div de destaque em uma cápsula horizontal */
+    display: inline-flex; 
+    /* coloca ícone e texto lado a lado */
+    align-items: center; 
+    /* centraliza verticalmente o ícone e o texto */
+    justify-content: center; 
+    /* centraliza o conteúdo dentro da cápsula */
+    gap: 10px; 
+    /* cria espaço entre a imagem pequena e o texto */
+    padding: 10px 18px; 
+    /* adiciona respiro interno para a cápsula ficar elegante */
+    margin: 10px; 
+    /* separa visualmente uma cápsula da outra */
+    border-radius: 999px; 
+    /* deixa o bloco com formato arredondado de pill */
+    background: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%); 
+    /* aplica o degradê azul parecido com o exemplo 
+    color: #000000; 
+    /* deixa o texto branco para ter contraste com o fundo azul */
+    font-size: 1rem; 
+    /* define um tamanho de texto equilibrado para a cápsula */
+    font-weight: 600; 
+    /* reforça o texto para parecer etiqueta de destaque */
+    line-height: 1; 
+    /* evita altura extra na linha do texto */
+    box-shadow: 0 10px 24px #000000b7; 
+    /* adiciona profundidade suave ao bloco */
+    width: fit-content; 
+    /* faz a largura acompanhar apenas o conteúdo */
+    max-width: 100%; 
+    /* impede que o item ultrapasse o espaço disponível */
+}
+
+.btn img { 
+    /* estiliza a imagem para ela parecer um ícone pequeno */
+    width: 18px; 
+    /* reduz bastante a largura da imagem para parecer ícone */
+    height: 18px; 
+    /* reduz a altura da imagem para manter proporção de ícone */
+    object-fit: contain; 
+    /* garante que a imagem inteira apareça sem cortar */
+    border-radius: 999px; 
+    /* arredonda a imagem para ficar mais próxima de um ícone */
+    padding: 4px; 
+    /* cria um pequeno respiro interno ao redor da imagem */
+    background-color: rgba(255, 255, 255, 0.14); 
+    /* adiciona um fundo suave por trás do ícone */
+    flex-shrink: 0; 
+    /* impede que o ícone encolha quando faltar espaço */
+}
+
+@media (max-width: 768px) { /* ajusta as cápsulas de destaque em telas menores */
+    .hero-badge-top { /* ajusta a distância do btn superior no celular */
+        margin-bottom: 20px; /* reduz o espaço para telas menores */
+    }
+
+    #hero p { /* reduz o espaço do subtítulo no mobile */
+        margin-bottom: 22px; /* aproxima um pouco a fileira inferior */
+    }
+
+    .hero-badges { /* mantém os btn organizados no mobile */
+        gap: 10px; /* reduz o espaçamento entre os btn */
+        margin-bottom: 14px; /* ajusta o espaço abaixo do grupo no celular */
+    }
+
+    .btn { /* reduz a cápsula no mobile */
+        font-size: 0.92rem; /* diminui levemente o texto para caber melhor */
+        padding: 9px 14px; /* reduz o espaço interno para não ficar grande demais */
+    }
+
+    .btn img { /* reduz ainda mais o ícone no celular */
+        width: 16px; /* deixa o ícone menor em telas pequenas */
+        height: 16px; /* mantém a proporção do ícone no mobile */
+    }
+}
+
+#seta {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+}
+
+.arrow-down {
+    width: 46px;
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    position: relative;
+    color: #ffffff;
+    text-decoration: none;
+    background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 45%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(8px);
+    animation: floatArrow 2s ease-in-out infinite;
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.arrow-down::before,
+.arrow-down::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    border-right: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+    transform: translateX(-50%) rotate(225deg);
+}
+
+.arrow-down::before {
+    width: 11px;
+    height: 11px;
+    top: 23px;
+}
+
+.arrow-down::after {
+    width: 8px;
+    height: 8px;
+    top: 14px;
+    opacity: 0.72;
+}
+
+.arrow-down:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes floatArrow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+#features {
+    padding: 100px;
+    background-color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    /* permite quebrar linha quando não couber na largura */
+    justify-content: center;
+    gap: 21px;
+    /* espaço fixo entre itens flex sem margin em cada um */
+    background-color: #ffffff;
+}
+
+.section-wrapper1 {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.section-wrapper1 h2 {
+    margin: 0 0 12px;
+    color: #1d242d;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.section-wrapper1 .section-subtitle {
+    max-width: 720px;
+    margin: 0 auto 34px;
+    color: #5d6671;
+    font-size: 1.15rem;
+    line-height: 1.65;
+}
+
+.card-feature {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(14, 38, 173, 0.568);
+    /* sombra: desloc-x, desloc-y, blur, cor com alpha */
+    padding: 40px;
+    width: 200px;
+    gap: 30px;
+    max-width: 100%;
+    /* em telas estreitas, não ultrapassa 100% do pai */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+}
+
+.card-feature img {
+    width: 80px;
+    height: 80px;
+    padding: 12px;
+    border-radius: 14px;
+    background-color: rgba(0, 38, 255, 0.397);
+    object-fit: contain;
+    /* mantém proporção da imagem dentro da caixa sem cortar */
+}
+
+.section-wrapper2 {
+    padding: 100px;
+    background-color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.section-wrapper2 h1 {
+    font-size: 2.5rem;
+    /* rem: tamanho relativo à fonte raiz do documento (acessível/escalável) */
+    margin-bottom: 10px;
+}
+
+.section-wrapper2 p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cards-grid1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin: 100px auto;
+    /* auto nas laterais centraliza o bloco quando há max-width */
+    padding: 10px;
+    background-color: #ffffff;
+    max-width: 1200px;
+    /* limita largura em telas grandes */
+}
+
+.card-product {
+    background-color: rgb(255, 255, 255);
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(14, 38, 173, 0.12);
+    padding: 24px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* filhos esticam na largura do card (útil com flex column) */
+    gap: 18px;
+    flex: 0 0 calc(33.333% - 16px);
+    /* não cresce/encolhe; base ~1/3 da linha menos o gap (calc faz a conta) */
+    box-sizing: border-box;
+    /* padding e border entram na largura total (evita “estourar” o layout) */
+}
+
+.card-product h3 {
+    margin: 6px 0 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #1d242d;
+}
+
+.card-product .product-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #5d6671;
+}
+
+.card-product .product-price {
+    margin: 2px 0 0;
+    font-size: 0.98rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #1d242d;
+}
+
+.product-image {
+    width: 100%;
+    height: 210px;
+    padding: 12px;
+    border-radius: 16px;
+    background-color: rgba(14, 38, 173, 0.08);
+    object-fit: contain;
+    display: block;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    
+    /* regras só até essa largura: layout responsivo */
+    .card-product {
+        flex: 0 0 calc(50% - 12px);
+    }
+}
+
+@media (max-width: 500px) {
+    .card-product {
+        flex: 0 0 100%;
+    }
+    .product-image {
+        height: 190px;
+    }
+    .card-product h3 {
+        font-size: 1rem;
+    }
+    .card-product .product-desc {
+        font-size: 0.92rem;
+    }
+    .card-product .product-price {
+        font-size: 0.96rem;
+    }
+}
+
+.btn-whatsapp {
+    background-color: #25d366;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    margin: 2px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: none;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.15s ease;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn-whatsapp::before {
+    content: "";
+    flex-shrink: 0;
+    width: 1.45em;
+    height: 1.45em;
+    background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M17.472%2014.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94%201.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198%200-.52.074-.792.372-.272.297-1.04%201.016-1.04%202.479%200%201.462%201.065%202.875%201.213%203.074.149.198%202.096%203.2%205.077%204.487.709.306%201.262.489%201.694.625.712.227%201.36.195%201.872.118.571-.085%201.758-.719%202.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421%207.403h-.004a9.87%209.87%200%2001-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86%209.86%200%2001-1.51-5.26c.001-5.45%204.436-9.884%209.888-9.884%202.64%200%205.122%201.03%206.988%202.898a9.825%209.825%200%20012.893%206.994c-.003%205.45-4.435%209.884-9.885%209.884m8.413-18.297A11.815%2011.815%200%200012.05%200C5.495%200%20.16%205.335.157%2011.892c0%202.096.547%204.142%201.588%205.945L.057%2024l6.305-1.654a11.882%2011.882%200%20005.683%201.448h.005c6.554%200%2011.89-5.335%2011.893-11.893a11.821%2011.821%200%2000-3.48-8.413z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
+}
+
+.btn-whatsapp:hover {
+    filter: brightness(1.06);
+}
+
+.card-product .btn-whatsapp {
+    align-self: center;
+}
+
+#cta {
+    background-color: #121b2b;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section-wrapper3 h2 {
+    font-size: 2.5rem;
+    /* rem: tamanho relativo à fonte raiz do documento (acessível/escalável) */
+    margin-bottom: 10px;
+}
+
+.section-wrapper3 {
+    padding: 48px 16px;
+    margin: 22px auto;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 1200px;
+}
+
+.section-wrapper3 h2 {
+    margin: 0 0 28px;
+    letter-spacing: -0.02em;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    align-items: stretch;
+    max-width: 1080px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background: #ffffff;
+    border: 1px solid rgba(29, 36, 45, 0.08);
+    border-radius: 18px;
+    padding: 34px 32px 28px;
+    text-align: left;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+.testimonial-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    background: rgba(79, 140, 255, 0.16);
+    border: 1px solid rgba(79, 140, 255, 0.22);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+    margin-bottom: 14px;
+}
+
+.testimonial-avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.testimonial-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at 20% 0%, rgba(79, 140, 255, 0.10), transparent 55%);
+}
+
+.testimonial-stars {
+    color: #f5c542;
+    -webkit-text-stroke: 0;
+    paint-order: initial;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+}
+
+.testimonial-text {
+    margin: 0 0 18px;
+    color: #5d6671;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    font-style: italic;
+}
+
+.testimonial-text:empty {
+    display: block;
+    min-height: 4.6em;
+}
+
+.testimonial-name {
+    margin: 0;
+    color: #1d242d;
+    font-weight: 700;
+    font-size: 0.98rem;
+}
+
+@media (max-width: 900px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .section-wrapper3 {
+        padding: 34px 14px;
+        margin: 16px auto;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .testimonial-card {
+        padding: 26px 20px 22px;
+    }
+
+    .testimonial-avatar {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+    }
+}
+
+.track-testimonial {
+    background-color: rgb(255, 255, 255);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-inline-start: 12px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    box-sizing: border-box;
+    flex: 0 0 calc(20% - 16px);
+    width: 220px;
+    padding: 30px 20px;
+    min-width: 220px;
+    /* a animação fica na trilha do carrossel (não no card) */
+}
+
+.track-testimonial1 {
+    background-color: rgb(255, 255, 255);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-inline-start: 12px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    box-sizing: border-box;
+    flex: 0 0 calc(20% - 16px);
+    width: 220px;
+    padding: 30px 20px;
+    min-width: 220px;
+    /* a animação fica na trilha do carrossel (não no card) */
+}
+
+.track-testimonial .testimonial-stars,
+.track-testimonial1 .testimonial-stars {
+    color: rgb(255, 230, 0);
+    -webkit-text-stroke: 1px #000;
+    /* prefixo webkit: contorno no traço do texto (estrelas ★) */
+    paint-order: stroke fill;
+    /* desenha o traço antes do preenchimento: borda visível sem “apagar” o amarelo */
+}
+.localizacao { /* aplica o estilo da seção usando um nome de classe sem acento */
+    /* Bloco de localização: container do mapa/endereço */
+    background: linear-gradient(90deg, #1538fd 0%, #4f8cff 100%); 
+    /* Degrade azul moderno */
+    border-radius: 16px;      
+    /* Cantos bem arredondados para visual suave */
+    padding: 28px 18px;       
+    /* Espaço interno generoso para respiro */
+    margin: 24px auto;        
+    /* Espaço externo e centralização automática */
+    font-size: 1.15rem;       
+    /* Tamanho de fonte acessível e responsivo */
+    color: #fff;              
+    /* Texto branco para contraste */
+    display: flex;            
+    /* Flexbox para alinhar filhos */
+    flex-direction: column;   
+    /* Empilha filhos verticalmente */
+    align-items: center;      
+    /* Centraliza filhos horizontalmente */
+    justify-content: center;  
+    /* Centraliza filhos verticalmente */
+    box-shadow: 0 6px 32px rgba(21, 56, 253, 0.534); 
+    /* Sombra suave para profundidade */
+    max-width: 900px;         
+    /* Limita largura em telas grandes */
+    width: 95%;               
+    /* Responsivo: ocupa quase toda a tela em mobile */
+    transition: box-shadow 0.3s;
+    /* Efeito suave ao passar o mouse */
+}
+
+.localizacao h2 { /* estiliza o título que fica dentro da seção de localização */
+    text-align: center;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.localizacao img { /* estiliza a imagem/ícone exibida dentro da seção de localização */
+    display: block;
+    margin: 0 auto 12px auto;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 2px 8px rgba(21,56,253,0.10);
+    padding: 6px;
+}
+
+.localizacao:hover { /* aumenta a sombra quando o mouse passa sobre a seção */
+    /* Destaque ao passar o mouse */
+    box-shadow: 0 12px 48px rgba(21, 56, 253, 0.705);
+}
+
+.nossa-localizacao {/* limita a largura do conteúdo interno do bloco de localização */
+    width: min(100%, 760px); 
+    /* usa 100% em telas pequenas e no máximo 760px em telas maiores */
+}
+
+#maps {/* estiliza o container externo do mapa */
+    width: 100%; 
+    /* faz o bloco do mapa ocupar toda a largura disponível do container pai */
+    min-height: 400px; 
+    /* garante uma altura mínima confortável para o mapa */
+    overflow: hidden; 
+    /* corta qualquer excesso para respeitar as bordas arredondadas */
+    border-radius: 18px; 
+    /* arredonda os cantos do container do mapa */
+    display: flex; 
+    /* usa flex para alinhar o iframe dentro do container */
+    justify-content: center; 
+    /* centraliza o conteúdo na horizontal */
+    align-items: center; 
+    /* centraliza o conteúdo na vertical */
+    background: #f5f7fa; 
+    /* aplica um fundo claro enquanto o mapa carrega */
+    box-shadow: 0 4px 24px rgba(21, 56, 253, 0.10); 
+    /* adiciona sombra suave ao bloco do mapa */
+    margin: 24px auto 0; 
+    /* cria espaço acima e centraliza o bloco horizontalmente */
+    transition: box-shadow 0.3s; 
+    /* suaviza a mudança de sombra no hover */
+}
+
+#maps:hover {/* intensifica a sombra quando o mouse passa sobre o mapa */
+    box-shadow: 0 8px 32px rgba(21, 56, 253, 0.18); 
+    /* aplica uma sombra mais forte no hover */
+}
+
+.map-frame { /* estiliza o iframe do Google Maps */
+    width: 100%; 
+    /* faz o iframe ocupar toda a largura do container */
+    height: 400px; 
+    /* define a altura padrão do mapa em telas maiores */
+    border: 0; 
+    /* remove a borda padrão do iframe */
+    display: block; 
+    /* evita espaços extras de elemento inline */
+}
+
+@media (max-width: 640px) { 
+    /* aplica ajustes específicos para telas menores */
+    .localizacao { 
+        /* ajusta o espaçamento da seção no celular */
+        padding: 22px 14px; 
+        /* reduz o padding para caber melhor em telas estreitas */
+    }
+
+    #maps, 
+    /* seleciona o container do mapa no mobile */
+    .map-frame { 
+        /* seleciona também o iframe do mapa no mobile */
+        min-height: 320px; 
+        /* reduz a altura mínima do mapa em telas pequenas */
+        height: 320px; 
+        /* define uma altura menor para melhorar a responsividade */
+    }
+}
+.img-cmt {
+    width: 80px;
+    height: 80px;
+    padding: 9px;
+    border-radius: 14px;
+    background-color: rgba(0, 38, 255, 0.397);
+    object-fit: contain;
+    /* mantém proporção da imagem dentro da caixa sem cortar */
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 12px;
+}
+
+.carousel1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0);
+    transition: transform 0.5s ease;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 50px 50px 0 0;
+    box-shadow:
+    0px -10px 20px rgb(0, 0, 0),/* cima */
+    -10px 0px 20px rgba(0, 0, 0, 0.13),/* esquerda */
+    10px 0px 20px rgba(0, 0, 0, 0.13);/* direita */
+}
+
+.carousel2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0);
+    transition: transform 0.5s ease;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 
+    0px 10px 20px rgba(0, 0, 0),/* baixo */
+    -10px 0px 20px rgba(0, 0, 0, 0.13),/* esquerda */
+    10px 0px 20px rgba(0, 0, 0, 0.13);/* direita */
+}
+
+.carousel-track {
+    display: flex;
+    align-items: stretch;
+    gap: 43px;
+    width: max-content;
+    will-change: transform;
+}
+
+.carousel-track--left {
+    animation: carousel-marquee-left 24s linear infinite;
+}
+
+.carousel-track--right {
+    animation: carousel-marquee-right 24s linear infinite;
+}
+
+@keyframes carousel-marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes carousel-marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track--left,
+    .carousel-track--right {
+        animation: none;
+    }
+}
+
+.section-wrapper3 {
+    padding: 48px 16px;
+    background-color: transparent;
+    margin: 22px auto;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    .section-wrapper3 {
+        margin: 16px auto;
+    }
+
+    .carousel1,
+    .carousel2 {
+        width: min(100%, 100%);
+        padding: 24px 12px;
+    }
+
+    .carousel-track {
+        gap: 20px;
+    }
+}
+
+/* Rodapé: coluna centralizada (como o layout de referência) */
+footer {
+    background-color: #000000;
+    /* cor de fundo sólida do bloco do rodapé */
+    text-align: center;
+    /* alinha o conteúdo de texto ao centro do footer */
+    padding: 40px 24px;
+    /* espaço interno: vertical maior, laterais fixas */
+    display: flex;
+    /* ativa flexbox para organizar os filhos do footer */
+    flex-direction: column;
+    /* empilha os filhos na vertical (um abaixo do outro) */
+    align-items: center;
+    /* centraliza cada filho no eixo horizontal (largura do footer) */
+    justify-content: center;
+    /* agrupa o conteúdo no centro do eixo vertical disponível */
+    gap: 14px;
+    /* distância uniforme entre cada “fileira” de filhos flex */
+}
+
+footer .footer-line {
+    margin: 0;
+    /* remove margem padrão do parágrafo para o espaçamento vir do gap do footer */
+    color: #474f52;
+    /* cor do texto “Desenvolvido por” */
+    font-size: 1rem;
+    /* tamanho da fonte relativo à raiz (1rem ≈ tamanho base do documento) */
+    font-weight: 400;
+    /* peso normal (não negrito) */
+}
+
+footer .footer-name {
+    margin: 0;
+    /* zera margem para não desalinhar em relação ao gap do footer */
+    color: #ffffff;
+    /* texto do nome em branco para contraste no fundo preto */
+    font-size: 1.65rem;
+    /* destaque: fonte maior que a linha “Desenvolvido por” */
+    font-weight: 700;
+    /* negrito para dar hierarquia visual ao nome */
+    line-height: 1.2;
+    /* altura entre linhas compacta se o nome quebrar em duas linhas */
+}
+
+footer .footer-links {
+    display: flex;
+    /* coloca WhatsApp, pontos e outros links na mesma “linha” lógica */
+    flex-direction: row;
+    /* direção horizontal: itens lado a lado */
+    flex-wrap: wrap;
+    /* em telas estreitas, os itens podem quebrar para a linha de baixo */
+    align-items: center;
+    /* alinha verticalmente links e caracteres • no meio */
+    justify-content: center;
+    /* centraliza o grupo de links no footer */
+    gap: 0.35rem 0.75rem;
+    /* espaço entre linhas (row) e entre colunas (column) ao quebrar */
+    margin: 0;
+    /* sem margem extra fora do bloco de links */
+    font-size: 1rem;
+    /* tamanho base do texto dos links e separadores herdados */
+}
+
+footer .footer-links a {
+    color: #474f52;
+    /* cor padrão dos links antes do passar o mouse */
+    text-decoration: none;
+    /* remove o sublinhado típico de links */
+}
+
+footer .footer-links a.footer-link-whatsapp:hover {
+    color: #25d366;
+    /* ao passar o mouse no WhatsApp, o texto fica verde (marca) */
+}
+
+footer .footer-links a.footer-link-email:hover {
+    color: #ffffff;
+    /* ao passar o mouse no Email, o texto fica branco */
+}
+
+footer .footer-links a.footer-link-instagram:hover {
+    color: #ee2a7b;
+    /* ao passar no Instagram, rosa/magenta no estilo da marca */
+}
+
+footer .footer-dot {
+    color: #474f52;
+    /* cor dos separadores “•” entre os links */
+    user-select: none;
+    /* evita selecionar o ponto com o mouse (só decoração) */
+}
+
+footer .footer-copy {
+    margin: 18px 0 0;
+    /* empurra o copyright para baixo (mais afastado da linha dos links) */
+    color: #34383b;
+    /* cinza escuro para texto secundário (menos destaque que o nome) */
+    font-size: 0.85rem;
+    /* texto do copyright menor que o restante do rodapé */
+    font-weight: 400;
+    /* peso normal do texto legal / copyright */
+}
+
+html {
+    scroll-behavior: smooth;
+}
