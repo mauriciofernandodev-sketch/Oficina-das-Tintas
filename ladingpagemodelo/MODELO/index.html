@@ -5,192 +5,442 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oficina das Tintas</title>
+    <meta name="description" content="Tintas, acessórios e atendimento especializado em Cuiabá. Escolha a cor e o produto certo para o seu projeto.">
     <link rel="icon" href="imgs/icon.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Inter:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <script>document.documentElement.classList.add('js');</script>
 </head>
 
 <body>
-    <nav id="nav">
-        <ul>
-            <li><img id="logo" src="imgs/icon.jpeg" alt="logo-nav"></li>
-            <li><a id="Inicio" href="#hero">Inicio</a></li>
-            <li><a id="Sobre" href="#features">Sobre-nos</a></li>
-            <li><a id="Produtos" href="#products">Produtos</a></li>
-            <li><a id="Contato" href="#cta">Contato</a></li>
-            <li><a href="#localizacao">localização</a></li>
+    <!-- ============ Definições SVG reutilizáveis (adesivos, fita, ícones) ============ -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <!-- textura granulada da fita (sem gradiente) -->
+            <filter id="grain" filterUnits="userSpaceOnUse" x="-300" y="-300" width="2040" height="1400">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n" />
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 -0.12" result="g" />
+                <feComposite in="g" in2="SourceGraphic" operator="in" result="gc" />
+                <feMerge>
+                    <feMergeNode in="SourceGraphic" />
+                    <feMergeNode in="gc" />
+                </feMerge>
+            </filter>
+
+            <symbol id="ribbon" viewBox="0 0 1440 800">
+                <g filter="url(#grain)" fill="none" stroke-linecap="round">
+                    <path d="M-120 640 C 180 780, 420 280, 720 420 S 1180 780, 1560 200" stroke="#4da2ff" stroke-width="130" />
+                    <path d="M-120 610 C 180 750, 420 250, 720 390 S 1180 750, 1560 170" stroke="#ffffff" stroke-opacity=".32" stroke-width="28" />
+                </g>
+            </symbol>
+
+            <symbol id="wa" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </symbol>
+
+            <!-- adesivos: contorno preto 1px + preenchimento chapado -->
+            <symbol id="st-drop" viewBox="0 0 100 100">
+                <path d="M50 6 C50 6 20 44 20 64 a30 30 0 0 0 60 0 C80 44 50 6 50 6Z" fill="#fb4903" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" />
+                <path d="M34 66 a16 16 0 0 0 12 14" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".7" />
+            </symbol>
+            <symbol id="st-bucket" viewBox="0 0 100 100">
+                <path d="M24 14 C24 -2 76 -2 76 14" fill="none" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" transform="translate(0 20)" />
+                <path d="M20 40 L29 90 H71 L80 40Z" fill="#ffd731" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+                <ellipse cx="50" cy="40" rx="30" ry="9" fill="#fb4903" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" />
+                <path d="M36 54 V78 M50 54 V78 M64 54 V78" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" opacity=".25" />
+            </symbol>
+            <symbol id="st-brush" viewBox="0 0 100 100">
+                <path d="M62 6 L94 38 L82 50 L50 18Z" fill="#5c4ade" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+                <path d="M50 18 L82 50 L72 60 L40 28Z" fill="#e9ccff" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+                <path d="M40 28 L72 60 C62 82 32 94 10 90 C16 70 26 44 40 28Z" fill="#fb4903" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="st-roller" viewBox="0 0 100 100">
+                <rect x="8" y="12" width="70" height="28" rx="10" fill="#55db9c" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" />
+                <path d="M78 26 H92 V54 H52 V66" fill="none" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+                <rect x="45" y="66" width="14" height="28" rx="5" fill="#5c4ade" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" />
+            </symbol>
+            <symbol id="st-spark" viewBox="0 0 100 100">
+                <path d="M50 4 L61 39 L96 50 L61 61 L50 96 L39 61 L4 50 L39 39Z" fill="#ffd731" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="st-check" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="#55db9c" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" />
+                <path d="M30 52 L45 66 L71 36" fill="none" stroke="#000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+            </symbol>
+            <symbol id="st-pin" viewBox="0 0 100 100">
+                <path d="M50 94 C50 94 16 58 16 38 a34 34 0 0 1 68 0 C84 58 50 94 50 94Z" fill="#fb4903" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+                <circle cx="50" cy="38" r="12" fill="#fff" stroke="#000" stroke-width="2" vector-effect="non-scaling-stroke" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <!-- ============ Faixa rolante ============ -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+            <span>Oficina das Tintas ✦ Tintas e acessórios ✦ Atendimento especializado ✦ Cuiabá ✦ Escolha a cor certa ✦ </span>
+            <span>Oficina das Tintas ✦ Tintas e acessórios ✦ Atendimento especializado ✦ Cuiabá ✦ Escolha a cor certa ✦ </span>
+        </div>
+    </div>
+
+    <!-- ============ Navegação ============ -->
+    <nav class="nav" id="nav" aria-label="Principal">
+        <a class="nav__logo" href="#hero" aria-label="Oficina das Tintas — início">
+            <img id="logo" src="imgs/icon.jpeg" alt="Logo Oficina das Tintas">
+        </a>
+        <ul class="nav__links">
+            <li><a class="pill" href="#hero">Início</a></li>
+            <li><a class="pill" href="#sobre">Sobre nós</a></li>
+            <li><a class="pill" href="#products">Produtos</a></li>
+            <li><a class="pill" href="#testimonials">Clientes</a></li>
+            <li><a class="pill" href="#cta">Contato</a></li>
+            <li><a class="pill" href="#localizacao">Localização</a></li>
         </ul>
+        <a class="btn btn--fill nav__cta"
+            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20duvida">
+            <svg class="ico"><use href="#wa" /></svg> WhatsApp
+        </a>
     </nav>
-    <header id="header"> <!-- Hero Section -->
 
-        <section id="hero"><!-- mantém um único btn no topo do hero -->
-            <h1>Oficina das Tintas</h1>
-            <p>Tintas, acessórios e atendimento especializado em Cuiabá. A gente te ajuda a escolher a cor e o produto certo para o seu projeto.</p>
-            <a class="btn-whatsapp"
-                href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20duvida">Entrar
-                em contato via
-                WhatsApp</a>
-            <div id="seta"><a href="#features" class="arrow-down" aria-label="Ir para a próxima seção"></a></div>
-        </section>
-    </header> <!-- Features Section -->
-    <section id="features">
-        <div class="section-wrapper1">
-            <h2>Sobre nós</h2>
-            <h2 class="section-subtitle">Eu ajudo você a escolher a tinta certa para transformar seu ambiente com mais cor, proteção e acabamento.</h2>
-            <div class="cards-grid">-
-                <div class="card-feature"> <img src="imgs/grupo.png" alt="sobre a empresa">
-                    <h3>📍 Sobre a empresa</h3>
-                    <p>Somos a Oficina das Tintas, uma loja especializada em produtos para pintura em Cuiabá. Atuamos com compromisso, qualidade e confiança, buscando sempre oferecer as melhores soluções para cada tipo de projeto, seja ele residencial ou profissional.</p>
-                </div>
-                <div class="card-feature"> <img src="imgs/desenvolvimento-de-produto.png" alt="produtos e variedade">
-                    <h3>🎨 Produtos e variedade</h3>
-                    <p>Trabalhamos com uma ampla linha de tintas, acessórios e materiais para pintura. Nosso objetivo é garantir que você encontre tudo o que precisa em um só lugar, com produtos de alta qualidade que proporcionam durabilidade e um acabamento impecável.</p>
-                </div>
-                <div class="card-feature"> <img src="imgs/servico-de-atendimento-ao-consumidor.png" alt="atendimento especializado">
-                    <h3>🤝 Atendimento especializado</h3>
-                    <p>Acreditamos que um bom resultado começa com a escolha certa. Por isso, oferecemos um atendimento próximo e personalizado, ajudando você a escolher cores, produtos e soluções ideais para o seu projeto com mais segurança e confiança.</p>
-                </div>
-                <div class="card-feature"> <img src="imgs/entrega-rapida.png" alt="agilidade e conveniência">
-                    <h3>🚚 Agilidade e conveniência</h3>
-                    <p>Valorizamos o seu tempo, por isso buscamos oferecer um atendimento rápido, prático e eficiente, desde o primeiro contato até a finalização da compra, garantindo uma experiência simples e sem complicações.</p>
-                </div>
-            </div>
-        </div>
-    </section> <!-- Products Section -->
-    <section id="products">
-        <div class="section-wrapper2">
-            <h1>Principais produtos</h1>
-            <p>Escolha e agende direto pelo WhatsApp</p>
-            <div class="cards-grid1">
-                <div class="card-product">
-                    <img class="product-image" src="imgs/master-interna.webp" alt="Foto do produto">
-                    <h3>Coral Master (Acrílica Premium)</h3>
-                    <h2 class="product-desc">Tinta acrílica premium indicada para pintura de paredes internas e externas. Oferece alta cobertura, excelente rendimento e acabamento uniforme, garantindo durabilidade e proteção para sua obra. Ideal para quem busca qualidade profissional com ótimo custo-benefício.</h2>
-                    <h2 class="product-price">R$189,90</h2>
-                    <a class="btn-whatsapp"
-                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral Master (Acrílica Premium)">Agendar
-                        no
-                        WhatsApp</a>
-                </div>
-                <div class="card-product">
-                    <img class="product-image" src="imgs/mofo-interna.jpg" alt="Foto do produto">
-                    <h3>Coral Chega de Mofo</h3>
-                    <h2 class="product-desc">Tinta antimofo com tecnologia exclusiva que elimina e previne o surgimento de mofo e bolor. Ideal para ambientes úmidos como banheiros, cozinhas e lavanderias. Acabamento fosco, pronta para uso.</h2>
-                    <h2 class="product-price">R$ 109,90</h2>
-                    <a class="btn-whatsapp"
-                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral Chega de Mofo">Agendar
-                        no
-                        WhatsApp</a>
-                </div>
-                <div class="card-product">
-                    <img class="product-image" src="imgs/renova-interna.webp" alt="Foto do produto">
-                    <h3>Renova Tetos</h3>
-                    <h2 class="product-desc">Tinta acrílica fosca especial para tetos de banheiros e cozinhas. Age direto no mofo, tem ótima cobertura, baixo respingamento e é ideal para áreas úmidas. Sem cheiro e pronta para uso. Uso interior e exterior (áreas cobertas).</h2>
-                    <h2 class="product-price">R$119,90</h2>
-                    <a class="btn-whatsapp"
-                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Renova Tetos">Agendar
-                        no
-                        WhatsApp</a>
-                </div>
-                <div class="card-product">
-                    <img class="product-image" src="imgs/chuva-externa.webp" alt="Foto do produto">
-                    <h3>Coral Proteção Sol & Chuva (Acrílico Total)</h3>
-                    <h2 class="product-desc">Tinta premium desenvolvida especialmente para áreas externas, oferecendo alta resistência contra sol, chuva, mofo e algas. Garante maior durabilidade, proteção prolongada e cores mais vivas por muito mais tempo.</h2>
-                    <h2 class="product-price">R$219,90</h2>
-                    <a class="btn-whatsapp"
-                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral Proteção Sol & Chuva (Acrílico Total)">Agendar
-                        no
-                        WhatsApp</a>
-                </div>
-                <div class="card-product">
-                    <img class="product-image" src="imgs/rende-externa.webp" alt="Foto do produto">
-                    <h3>Coral Rende Muito (Tinta Concentrada)</h3>
-                    <h2 class="product-desc">Tinta acrílica concentrada com alto rendimento e excelente cobertura. Ideal para áreas internas e externas, possui baixo odor e proporciona um acabamento fosco uniforme, sendo perfeita para quem busca economia sem abrir mão da qualidade.</h2>
-                    <h2 class="product-price">R$139,90</h2>
-                    <a class="btn-whatsapp"
-                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral Rende Muito (Tinta Concentrada)">Agendar
-                        no
-                        WhatsApp</a>
-                </div>
-                <div class="card-product">
-                    <img class="product-image" src="imgs/coralar-externa.webp" alt="Foto do produto">
-                    <h3>Coral Coralar (Acrílico Brilho e Proteção)</h3>
-                    <h2 class="product-desc">Tinta acrílica com acabamento brilhante, ideal para ambientes internos e externos. Possui fácil aplicação, boa resistência e é simples de limpar, garantindo um visual bonito e duradouro para qualquer ambiente.</h2>
-                    <h2 class="product-price">R$119,90</h2>
-                    <a class="btn-whatsapp"
-                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral Coralar (Acrílico Brilho e Proteção)">Agendar
-                        no
-                        WhatsApp</a>
+    <main>
+        <!-- ============ HERO ============ -->
+        <header class="hero band band--sky" id="hero">
+            <svg class="ribbon ribbon--hero" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <use href="#ribbon" />
+            </svg>
+
+            <svg class="sticker" data-depth="30" style="--r:-14deg; top:12%; left:7%; width:clamp(64px,9vw,130px)" aria-hidden="true"><use href="#st-drop" /></svg>
+            <svg class="sticker" data-depth="-24" style="--r:12deg; top:10%; right:9%; width:clamp(70px,10vw,150px)" aria-hidden="true"><use href="#st-bucket" /></svg>
+            <svg class="sticker" data-depth="22" style="--r:-8deg; bottom:20%; left:5%; width:clamp(64px,9vw,130px)" aria-hidden="true"><use href="#st-brush" /></svg>
+            <svg class="sticker" data-depth="-34" style="--r:10deg; bottom:16%; right:6%; width:clamp(64px,9vw,130px)" aria-hidden="true"><use href="#st-roller" /></svg>
+            <svg class="sticker sticker--sm" data-depth="40" style="--r:0deg; top:42%; left:18%" aria-hidden="true"><use href="#st-spark" /></svg>
+            <svg class="sticker sticker--sm" data-depth="-40" style="--r:0deg; top:34%; right:20%" aria-hidden="true"><use href="#st-spark" /></svg>
+
+            <div class="hero__inner">
+                <ul class="tags" aria-label="O que você encontra">
+                    <li class="tag tag--mint">Tintas</li>
+                    <li class="tag tag--lav">Acessórios</li>
+                    <li class="tag tag--sun">Atendimento especializado</li>
+                </ul>
+
+                <h1 class="display hero__title">
+                    <span class="line"><span>Oficina</span></span>
+                    <span class="line"><span>das</span></span>
+                    <span class="line"><span>Tintas</span></span>
+                </h1>
+
+                <p class="hero__lead">Tintas, acessórios e atendimento especializado em Cuiabá. A gente te ajuda a escolher a cor e o produto certo para o seu projeto.</p>
+
+                <div class="hero__actions">
+                    <a class="btn btn--fill btn--lg"
+                        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20duvida">
+                        <svg class="ico"><use href="#wa" /></svg> Entrar em contato via WhatsApp
+                    </a>
+                    <a class="btn btn--ghost btn--lg" href="#products">Ver produtos</a>
                 </div>
             </div>
-        </div>
-    </section> <!-- Testimonials Section -->
-    <section id="cta">
-        <div class="section-wrapper4">
-            <h2>Se interessou nos produtos?</h2>
-            <p>Entre em contato agora via WhatsApp conheça mais sobre nossos produtos</p>
-            <a id="btn-whatsapp1" class="btn-whatsapp"
-                href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20conhecer%20mais%20produtos">Fale
-                no WhatsApp</a>
-        </div>
-    </section>
-    
-    <section class="localizacao" id="localizacao">
-        
-        <!-- define a seção de localização com classe para estilo e id para Ã¢ncora do menu -->
-        <div class="nossa-localizacao">
-            <!-- cria um container interno para limitar a largura do conteÃºdo -->
-            <img src="imgs/icon.jpeg" alt="icon da loc" id="icon-loc">
-            <h2>venha nos conhecer</h2>
-            <div id="maps"> 
-            <!-- envolve o iframe para controlar tamanho, borda arredondada e sombra via CSS -->
-            <iframe
-            class="map-frame"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7684.915916321392!2d-56.0755777!3d-15.6205832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x939dae2962cc567f%3A0xea20b5db37b831c9!2sOficina%20das%20Tintas%20Sua%20casa%20das%20tintas%20em%20Cuiab%C3%A1%20(Campe%C3%A3o%20das%20Tintas%20Carmindo%20de%20Campos)!5e0!3m2!1spt-BR!2sbr!4v1776975981727!5m2!1spt-BR!2sbr"
-                allowfullscreen loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+
+            <a href="#sobre" class="arrow-down" aria-label="Ir para a próxima seção"><span></span></a>
+        </header>
+
+        <!-- ============ SOBRE ============ -->
+        <section class="band band--white" id="sobre">
+            <svg class="sticker sticker--float-r" style="--r:14deg; top:60px; right:6%; width:clamp(56px,7vw,100px)" aria-hidden="true"><use href="#st-check" /></svg>
+
+            <div class="wrap">
+                <header class="sec-head" data-reveal>
+                    <h2 class="display">Sobre nós</h2>
+                    <p class="lead">Eu ajudo você a escolher a tinta certa para transformar seu ambiente com mais cor, proteção e acabamento.</p>
+                </header>
+
+                <div class="grid grid--4">
+                    <article class="card card--mint" style="--tilt:-1.2deg" data-reveal>
+                        <div class="badge"><img src="imgs/grupo.png" alt="Sobre a empresa"></div>
+                        <h3> Sobre a empresa</h3>
+                        <p>Somos a Oficina das Tintas, uma loja especializada em produtos para pintura em Cuiabá. Atuamos com compromisso, qualidade e confiança, buscando sempre oferecer as melhores soluções para cada tipo de projeto, seja ele residencial ou profissional.</p>
+                    </article>
+                    <article class="card card--lav card--round" style="--tilt:1deg; --d:.08s" data-reveal>
+                        <div class="badge"><img src="imgs/desenvolvimento-de-produto.png" alt="Produtos e variedade"></div>
+                        <h3> Produtos e variedade</h3>
+                        <p>Trabalhamos com uma ampla linha de tintas, acessórios e materiais para pintura. Nosso objetivo é garantir que você encontre tudo o que precisa em um só lugar, com produtos de alta qualidade que proporcionam durabilidade e um acabamento impecável.</p>
+                    </article>
+                    <article class="card card--sun" style="--tilt:-.8deg; --d:.16s" data-reveal>
+                        <div class="badge"><img src="imgs/servico-de-atendimento-ao-consumidor.png" alt="Atendimento especializado"></div>
+                        <h3> Atendimento especializado</h3>
+                        <p>Acreditamos que um bom resultado começa com a escolha certa. Por isso, oferecemos um atendimento próximo e personalizado, ajudando você a escolher cores, produtos e soluções ideais para o seu projeto com mais segurança e confiança.</p>
+                    </article>
+                    <article class="card card--sky card--round" style="--tilt:1.2deg; --d:.24s" data-reveal>
+                        <div class="badge"><img src="imgs/entrega-rapida.png" alt="Agilidade e conveniência"></div>
+                        <h3> Agilidade e conveniência</h3>
+                        <p>Valorizamos o seu tempo, por isso buscamos oferecer um atendimento rápido, prático e eficiente, desde o primeiro contato até a finalização da compra, garantindo uma experiência simples e sem complicações.</p>
+                    </article>
+                </div>
             </div>
-        </div> <!-- fecha o container interno da seção de localização -->
         </section>
 
-    <section id="testimonials">
-        <div class="section-wrapper3">
-            <h2>O que os clientes dizem</h2>
-            <div class="testimonials-grid" aria-label="Avaliações de clientes">
-                <article class="testimonial-card">
-                    <div class="testimonial-avatar" aria-hidden="true"><img src="imgs/ana siqueira.png" alt="icon de review" class="avaliacao-icon"></div>
-                    <div class="testimonial-stars" aria-label="5 estrelas">★★★★★</div>
-                    <p class="testimonial-text">Excelente atendimento, tanto dos funcionários como dos donos! Eles também possuem diversos produtos e de qualidade, comprei praticamente tudo lá para poder fazer a reforma da casa</p>
-                    <p class="testimonial-name">ana siqueira</p>
-                </article>
-                
-                <article class="testimonial-card">
-                    <div class="testimonial-avatar" aria-hidden="true"><img src="imgs/Eliane Bernardes.png" alt="icon de review" class="avaliacao-icon"></div>
-                    <div class="testimonial-stars" aria-label="5 estrelas">★★★★★</div>
-                    <p class="testimonial-text">O atendimento foi excelente! Fui acolhida de forma humanizada, com total atenção às minhas preferências e necessidades. Os profissionais Rodrigo e Aline, demonstraram cuidado em cada etapa, oferecendo todo o suporte necessário para que eu me sentisse segura, bem informada e plenamente satisfeita com a compra dos materiais. Fiquei muito contente com a experiência!!!</p>
-                    <p class="testimonial-name">Eliane Bernardes</p>
-                </article>
-                
-                <article class="testimonial-card">
-                    <div class="testimonial-avatar" aria-hidden="true"><img src="imgs/Kamilly Lara.png" alt="icon de review" class="avaliacao-icon"></div>
-                    <div class="testimonial-stars" aria-label="5 estrelas">★★★★★</div>
-                    <p class="testimonial-text">Fomos muito bem atendidos, o consultor Rodrigo que nos atendeu no dia tirou todas as dúvidas e nos atendeu com muita calma e atenção mesmo sendo quase o horário da loja fechar , ganharam mais uma cliente!</p>
-                    <p class="testimonial-name">Kamilly Lara</p>
-                </article>
+        <!-- ============ PRODUTOS ============ -->
+        <section class="band band--gray" id="products">
+            <svg class="sticker sticker--float-l" style="--r:-12deg; top:50px; left:5%; width:clamp(56px,7vw,100px)" aria-hidden="true"><use href="#st-drop" /></svg>
+
+            <div class="wrap">
+                <header class="sec-head" data-reveal>
+                    <h2 class="display">Principais produtos</h2>
+                    <p class="lead">Escolha e agende direto pelo WhatsApp</p>
+                </header>
+
+                <div class="grid grid--3">
+                    <article class="product product--featured" data-reveal>
+                        <span class="best-seller">Produto que mais sai!</span>
+                        <div class="product__media wash-lav">
+                            <img src="imgs/master-interna.webp" alt="Coral Master (Acrílica Premium)" loading="lazy">
+                            <span class="price-sticker">R$ 189,90</span>
+                        </div>
+                        <h3>Coral Master (Acrílica Premium)</h3>
+                        <p>Tinta acrílica premium indicada para pintura de paredes internas e externas. Oferece alta cobertura, excelente rendimento e acabamento uniforme, garantindo durabilidade e proteção para sua obra. Ideal para quem busca qualidade profissional com ótimo custo-benefício.</p>
+                        <a class="btn btn--fill"
+                            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral%20Master%20(Acr%C3%ADlica%20Premium)">
+                            <svg class="ico"><use href="#wa" /></svg> Agendar no WhatsApp
+                        </a>
+                    </article>
+
+                    <article class="product" style="--d:.08s" data-reveal>
+                        <div class="product__media wash-mint">
+                            <img src="imgs/mofo-interna.jpg" alt="Coral Chega de Mofo" loading="lazy">
+                            <span class="price-sticker">R$&nbsp;109,90</span>
+                        </div>
+                        <h3>Coral Chega de Mofo</h3>
+                        <p>Tinta antimofo com tecnologia exclusiva que elimina e previne o surgimento de mofo e bolor. Ideal para ambientes úmidos como banheiros, cozinhas e lavanderias. Acabamento fosco, pronta para uso.</p>
+                        <a class="btn btn--fill"
+                            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral%20Chega%20de%20Mofo">
+                            <svg class="ico"><use href="#wa" /></svg> Agendar no WhatsApp
+                        </a>
+                    </article>
+
+                    <article class="product" style="--d:.16s" data-reveal>
+                        <div class="product__media wash-sun">
+                            <img src="imgs/renova-interna.webp" alt="Renova Tetos" loading="lazy">
+                            <span class="price-sticker">R$&nbsp;119,90</span>
+                        </div>
+                        <h3>Renova Tetos</h3>
+                        <p>Tinta acrílica fosca especial para tetos de banheiros e cozinhas. Age direto no mofo, tem ótima cobertura, baixo respingamento e é ideal para áreas úmidas. Sem cheiro e pronta para uso. Uso interior e exterior (áreas cobertas).</p>
+                        <a class="btn btn--fill"
+                            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Renova%20Tetos">
+                            <svg class="ico"><use href="#wa" /></svg> Agendar no WhatsApp
+                        </a>
+                    </article>
+
+                    <article class="product" data-reveal>
+                        <div class="product__media wash-sky">
+                            <img src="imgs/chuva-externa.webp" alt="Coral Proteção Sol & Chuva (Acrílico Total)" loading="lazy">
+                            <span class="price-sticker">R$&nbsp;219,90</span>
+                        </div>
+                        <h3>Coral Proteção Sol &amp; Chuva (Acrílico Total)</h3>
+                        <p>Tinta premium desenvolvida especialmente para áreas externas, oferecendo alta resistência contra sol, chuva, mofo e algas. Garante maior durabilidade, proteção prolongada e cores mais vivas por muito mais tempo.</p>
+                        <a class="btn btn--fill"
+                            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral%20Prote%C3%A7%C3%A3o%20Sol%20%26%20Chuva%20(Acr%C3%ADlico%20Total)">
+                            <svg class="ico"><use href="#wa" /></svg> Agendar no WhatsApp
+                        </a>
+                    </article>
+
+                    <article class="product" style="--d:.08s" data-reveal>
+                        <div class="product__media wash-lav">
+                            <img src="imgs/rende-externa.webp" alt="Coral Rende Muito (Tinta Concentrada)" loading="lazy">
+                            <span class="price-sticker">R$&nbsp;139,90</span>
+                        </div>
+                        <h3>Coral Rende Muito (Tinta Concentrada)</h3>
+                        <p>Tinta acrílica concentrada com alto rendimento e excelente cobertura. Ideal para áreas internas e externas, possui baixo odor e proporciona um acabamento fosco uniforme, sendo perfeita para quem busca economia sem abrir mão da qualidade.</p>
+                        <a class="btn btn--fill"
+                            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral%20Rende%20Muito%20(Tinta%20Concentrada)">
+                            <svg class="ico"><use href="#wa" /></svg> Agendar no WhatsApp
+                        </a>
+                    </article>
+
+                    <article class="product" style="--d:.16s" data-reveal>
+                        <div class="product__media wash-mint">
+                            <img src="imgs/coralar-externa.webp" alt="Coral Coralar (Acrílico Brilho e Proteção)" loading="lazy">
+                            <span class="price-sticker">R$&nbsp;119,90</span>
+                        </div>
+                        <h3>Coral Coralar (Acrílico Brilho e Proteção)</h3>
+                        <p>Tinta acrílica com acabamento brilhante, ideal para ambientes internos e externos. Possui fácil aplicação, boa resistência e é simples de limpar, garantindo um visual bonito e duradouro para qualquer ambiente.</p>
+                        <a class="btn btn--fill"
+                            href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20tive%20interesse%20no%20produto%20Coral%20Coralar%20(Acr%C3%ADlico%20Brilho%20e%20Prote%C3%A7%C3%A3o)">
+                            <svg class="ico"><use href="#wa" /></svg> Agendar no WhatsApp
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ DEPOIMENTOS ============ -->
+        <section class="band band--sky" id="testimonials">
+            <svg class="sticker sticker--float-r" style="--r:10deg; top:48px; right:7%; width:clamp(48px,6vw,88px)" aria-hidden="true"><use href="#st-spark" /></svg>
+
+            <div class="wrap">
+                <header class="sec-head" data-reveal>
+                    <h2 class="display">O que os clientes dizem</h2>
+                </header>
+
+                <div class="grid grid--3-t" aria-label="Avaliações de clientes">
+                    <article class="card card--lav testi" style="--tilt:-1deg" data-reveal>
+                        <div class="avatar"><img src="imgs/ana%20siqueira.png" alt="Foto de Ana Siqueira"></div>
+                        <div class="stars" aria-label="5 estrelas"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+                        <p class="testi__text">Excelente atendimento, tanto dos funcionários como dos donos! Eles também possuem diversos produtos e de qualidade, comprei praticamente tudo lá para poder fazer a reforma da casa</p>
+                        <p class="testi__name">Ana Siqueira</p>
+                    </article>
+
+                    <article class="card card--mint card--round testi" style="--tilt:.8deg; --d:.1s" data-reveal>
+                        <div class="avatar"><img src="imgs/Eliane%20Bernardes.png" alt="Foto de Eliane Bernardes"></div>
+                        <div class="stars" aria-label="5 estrelas"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+                        <p class="testi__text">O atendimento foi excelente! Fui acolhida de forma humanizada, com total atenção às minhas preferências e necessidades. Os profissionais Rodrigo e Aline, demonstraram cuidado em cada etapa, oferecendo todo o suporte necessário para que eu me sentisse segura, bem informada e plenamente satisfeita com a compra dos materiais. Fiquei muito contente com a experiência!!!</p>
+                        <p class="testi__name">Eliane Bernardes</p>
+                    </article>
+
+                    <article class="card card--sun testi" style="--tilt:-.6deg; --d:.2s" data-reveal>
+                        <div class="avatar"><img src="imgs/Kamilly%20Lara.png" alt="Foto de Kamilly Lara"></div>
+                        <div class="stars" aria-label="5 estrelas"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></div>
+                        <p class="testi__text">Fomos muito bem atendidos, o consultor Rodrigo que nos atendeu no dia tirou todas as dúvidas e nos atendeu com muita calma e atenção mesmo sendo quase o horário da loja fechar , ganharam mais uma cliente!</p>
+                        <p class="testi__name">Kamilly Lara</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CTA ============ -->
+        <section class="band band--blue cta" id="cta">
+            <svg class="ribbon ribbon--cta" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <use href="#ribbon" />
+            </svg>
+            <svg class="sticker" style="--r:-10deg; top:14%; left:8%; width:clamp(60px,8vw,120px)" aria-hidden="true"><use href="#st-brush" /></svg>
+            <svg class="sticker" style="--r:12deg; bottom:14%; right:8%; width:clamp(60px,8vw,120px)" aria-hidden="true"><use href="#st-bucket" /></svg>
+
+            <div class="wrap cta__inner" data-reveal>
+                <h2 class="display">Se interessou nos produtos?</h2>
+                <p class="lead">Entre em contato agora via WhatsApp e conheça mais sobre nossos produtos.</p>
+                <a id="btn-whatsapp1" class="btn btn--fill btn--lg"
+                    href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20conhecer%20mais%20produtos">
+                    <svg class="ico"><use href="#wa" /></svg> Fale no WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <!-- ============ LOCALIZAÇÃO ============ -->
+        <section class="band band--white" id="localizacao">
+            <div class="wrap wrap--narrow">
+                <header class="sec-head" data-reveal>
+                    <svg class="pin" aria-hidden="true"><use href="#st-pin" /></svg>
+                    <h2 class="display">Venha nos conhecer</h2>
+                </header>
+
+                <div class="map" data-reveal>
+                    <iframe class="map__frame" title="Mapa da Oficina das Tintas"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7684.915916321392!2d-56.0755777!3d-15.6205832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x939dae2962cc567f%3A0xea20b5db37b831c9!2sOficina%20das%20Tintas%20Sua%20casa%20das%20tintas%20em%20Cuiab%C3%A1%20(Campe%C3%A3o%20das%20Tintas%20Carmindo%20de%20Campos)!5e0!3m2!1spt-BR!2sbr!4v1776975981727!5m2!1spt-BR!2sbr"
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <p class="map__cta" data-reveal>
+                    <a class="btn btn--ghost" target="_blank" rel="noopener"
+                        href="https://www.google.com/maps/search/?api=1&query=Oficina+das+Tintas+Cuiab%C3%A1">Abrir no Google Maps</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ RODAPÉ ============ -->
+    <footer class="footer" id="footer">
+        <div class="footer__panel">
+            <div class="footer__top">
+                <nav class="fcol" aria-label="Menu">
+                    <h3>Menu</h3>
+                    <ul>
+                        <li><a href="#hero">Início</a></li>
+                        <li><a href="#sobre">Sobre nós</a></li>
+                        <li><a href="#products">Produtos</a></li>
+                        <li><a href="#testimonials">Clientes</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="fcol" aria-label="Produtos">
+                    <h3>Produtos</h3>
+                    <ul>
+                        <li><a href="#products">Coral Master</a></li>
+                        <li><a href="#products">Chega de Mofo</a></li>
+                        <li><a href="#products">Renova Tetos</a></li>
+                        <li><a href="#products">Sol &amp; Chuva</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="fcol" aria-label="Contato">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a class="footer-link-whatsapp" href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20duvida">WhatsApp</a></li>
+                        <li><a class="footer-link-email" href="#">Email</a></li>
+                        <li><a class="footer-link-instagram" href="#">Instagram</a></li>
+                        <li><a href="#localizacao">Localização</a></li>
+                    </ul>
+                </nav>
+
+                <div class="fnews">
+                    <h3>Peça seu orçamento</h3>
+                    <form class="quote" id="quote-form">
+                        <label class="sr-only" for="quote-input">Qual tinta você procura?</label>
+                        <input id="quote-input" type="text" placeholder="Qual tinta você procura?" autocomplete="off" required>
+                        <button type="submit">Enviar</button>
+                    </form>
+
+                    <ul class="socials" aria-label="Redes sociais">
+                        <li>
+                            <a href="#" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" /></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20duvida" aria-label="WhatsApp">
+                                <svg viewBox="0 0 24 24"><use href="#wa" /></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Oficina+das+Tintas+Cuiab%C3%A1" target="_blank" rel="noopener" aria-label="Localização no Google Maps">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="footer__copy">© <span id="year">2026</span> Oficina das Tintas. Todos os direitos reservados.</p>
+                    <p class="footer__dev">Desenvolvido por <a href="https://wa.me/5565996728783?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Oficina%20das%20Tintas%20e%20gostaria%20de%20realizar%20um%20projeto%20com%20voc%C3%AA">Mauricio Fernando - Web Developer</a></p>
+                </div>
+            </div>
+
+            <div class="wordmark" aria-hidden="true">
+                <!-- selo giratório -->
+                <svg class="seal" viewBox="0 0 200 200">
+                    <defs>
+                        <path id="seal-path" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0" />
+                    </defs>
+                    <circle cx="100" cy="100" r="97" fill="#ffd731" stroke="#000" stroke-width="1.5" />
+                    <g class="seal__text">
+                        <text font-size="17" font-weight="700" letter-spacing="2" fill="#000">
+                            <textPath href="#seal-path" textLength="430" lengthAdjust="spacing">OFICINA DAS TINTAS • CUIABÁ • </textPath>
+                        </text>
+                    </g>
+                    <use href="#st-drop" x="58" y="58" width="84" height="84" />
+                </svg>
+
+                <span class="wordmark__text">
+                    <span style="--i:0">T</span><span style="--i:1">I</span><span style="--i:2">N</span><span style="--i:3">T</span><span style="--i:4">A</span><span style="--i:5">S</span>
+                </span>
             </div>
         </div>
-    </section> <!-- CTA Section -->
-    <footer>
-        <p class="footer-line">Desenvolvido por</p>
-        <p class="footer-name">Mauricio fernando - Web Developer</p>
-        <div class="footer-links"> <a class="footer-link-whatsapp"
-                href="https://wa.me/065996728783?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Oficina das Tintas%20e%20gostaria%20de%20realizar%20um%20projeto%20com%20voc%C3%AA">WhatsApp</a>
-            <span class="footer-dot" aria-hidden="true">•</span> <a class="footer-link-email" href="">Email</a> <span
-                class="footer-dot" aria-hidden="true">•</span> <a class="footer-link-instagram" href="">Instagram</a>
-        </div>
-        <p class="footer-copy">© 2026 Todos os direitos reservados</p>
     </footer>
+
+    <!-- botão flutuante -->
+    <a class="fab" id="fab" aria-label="Falar no WhatsApp"
+        href="https://wa.me/5565999768600?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20duvida">
+        <svg class="ico"><use href="#wa" /></svg>
+    </a>
+
     <script src="index.js"></script>
 </body>
 
-</html> 
+</html>
